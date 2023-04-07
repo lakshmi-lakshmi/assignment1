@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_BOOKS 100 
+
+struct Book {
+    char title[100];
+    char author[50];
+    int year_published;
+    int num_pages;
+};
+
+struct Library {
+    struct Book books[MAX_BOOKS];
+    int count;
+};
+
+void add_book(struct Library *lib) {
+    if (lib->count == MAX_BOOKS) {
+        printf("Error: Library is full\n");
+        return;
+    }
+
+    struct Book new_book;
+
+    printf("Enter book title: ");
+    scanf("%99s", new_book.title); 
+
+    printf("Enter author name: ");
+    scanf("%49s", new_book.author); 
+
+    printf("Enter year published: ");
+    scanf("%d", &new_book.year_published);
+
+    printf("Enter number of pages: ");
+    scanf("%d", &new_book.num_pages);
+
+    lib->books[lib->count] = new_book;
+    lib->count++;
+
+    printf("Book added successfully\n");
+}
+
+void display_books(struct Library lib) {
+    printf("Book details:\n");
+
+    for (int i = 0; i < lib.count; i++) {
+        struct Book book = lib.books[i];
+        printf("Title: %s\n", book.title);
+        printf("Author: %s\n", book.author);
+        printf("Year published: %d\n", book.year_published);
+        printf("Number of pages: %d\n\n", book.num_pages);
+    }
+}
+
+void list_books_by_author(struct Library lib) {
+    char author[50];
+
+    printf("Enter author name: ");
+    scanf("%49s", author);
+
+    printf("Books by author %s:\n", author);
+
+    for (int i = 0; i < lib.count; i++) {
+        struct Book book = lib.books[i];
+
+        if (strcmp(book.author, author) == 0) {
+            printf("%s\n", book.title);
+        }
+    }
+}
+
+void list_book_count(struct Library lib) {
+    printf("Number of books in library: %d\n", lib.count);
+}
+
+int main() {
+    struct Library library = {0};
+
+    int choice;
+
+    do {
+        printf("\nLibrary Menu:\n");
+        printf("1. Add book details\n");
+        printf("2. Display book details\n");
+        printf("3. List all books of given author\n");
+        printf("4. List the count of books in the library\n");
+        printf("5. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                add_book(&library);
+                break;
+            case 2:
+                display_books(library);
+                break;
+            case 3:
+                list_books_by_author(library);
+                break;
+            case 4:
+                list_book_count(library);
+                break;
+            case 5:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice\n");
+                break;
+        }
+    } while (choice != 5);
+
+    return 0;
