@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+    int eno;
+    char ename[50];
+    float salary;
+} employee;
+
+int main() {
+    int n;
+    printf("Enter the number of employees: ");
+    scanf("%d", &n);
+
+    employee employees[n];
+    for (int i = 0; i < n; i++) {
+        printf("Enter employee %d details:\n", i+1);
+        printf("Employee No.: ");
+        scanf("%d", &employees[i].eno);
+        printf("Name: ");
+        scanf("%s", employees[i].ename);
+        printf("Salary: ");
+        scanf("%f", &employees[i].salary);
+    }
+
+    employee highest_salary_employee = employees[0];
+    for (int i = 1; i < n; i++) {
+        if (employees[i].salary > highest_salary_employee.salary) {
+            highest_salary_employee = employees[i];
+        }
+    }
+
+    printf("Employee with highest salary:\n");
+    printf("Employee No.: %d, Name: %s, Salary: %.2f\n", 
+           highest_salary_employee.eno, highest_salary_employee.ename, highest_salary_employee.salary);
+
+    return 0;
+}
