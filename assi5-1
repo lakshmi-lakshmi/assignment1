@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char ch, prev_ch = '\n';
+    int lines = 0, words = 0, chars = 0;
+
+    while ((ch = getchar()) != EOF) {
+        chars++;
+
+        if (ch == '\n') {
+            lines++;
+        }
+
+        if (!isspace(ch) && isspace(prev_ch)) {
+            words++;
+        }
+
+        prev_ch = ch;
+    }
+
+    printf("Lines: %d\n", lines);
+    printf("Words: %d\n", words);
+    printf("Characters: %d\n", chars);
+
+    return 0;
