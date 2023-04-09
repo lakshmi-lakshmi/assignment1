@@ -1,0 +1,35 @@
+def print_grade_sheet(name, grades):
+    print("Grade sheet for", name)
+    print("--------------------")
+    total_marks = 0
+    for subject, marks in grades.items():
+        print(subject, ":", marks)
+        total_marks += marks
+    percentage = (total_marks / (len(grades) * 100)) * 100
+    print("--------------------")
+    print("Total marks :", total_marks)
+    print("Percentage :", percentage)
+    if percentage >= 90:
+        print("Grade : A+")
+    elif percentage >= 80:
+        print("Grade : A")
+    elif percentage >= 70:
+        print("Grade : B+")
+    elif percentage >= 60:
+        print("Grade : B")
+    elif percentage >= 50:
+        print("Grade : C")
+    else:
+        print("Grade : F")
+
+# Sample data
+grades = {
+    "Maths": 85,
+    "Science": 90,
+    "English": 75,
+    "Social Studies": 80
+}
+name = "John"
+
+# Call the function to print the grade sheet
+print_grade_sheet(name, grades)
